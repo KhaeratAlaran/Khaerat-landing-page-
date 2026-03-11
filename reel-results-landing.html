@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reel Results — The Complete Video Editing Programme</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --beige: #E8DFD0;
+    --warm-tan: #C9B99A;
+    --dark-brown: #2C1A0E;
+    --mid-brown: #5C3D2E;
+    --accent: #C4622D;
+    --accent-light: #E8845A;
+    --soft-white: #FAF7F2;
+    --text-muted: #8A7060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--dark-brown);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 185, 154, 0.3);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta:hover {
+    background: var(--mid-brown);
+    transform: translateY(-1px);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 80px 80px;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 98, 45, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 185, 154, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--beige);
+    border: 1px solid var(--warm-tan);
+    color: var(--mid-brown);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--dark-brown);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--mid-brown);
+    max-width: 480px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(196, 98, 45, 0.3);
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: var(--mid-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(196, 98, 45, 0.4);
+  }
+
+  .btn-ghost {
+    color: var(--mid-brown);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--accent); }
+
+  /* hero visual card */
+  .hero-visual {
+    position: relative;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+
+  .hero-card {
+    background: var(--soft-white);
+    border-radius: 24px;
+    padding: 48px 40px;
+    border: 1px solid var(--beige);
+    box-shadow: 0 20px 60px rgba(44, 26, 14, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  }
+
+  .pain-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .pain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--mid-brown);
+    line-height: 1.5;
+  }
+
+  .pain-icon {
+    width: 22px; height: 22px;
+    background: rgba(196, 98, 45, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 0.7rem;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: var(--beige);
+    margin: 24px 0;
+  }
+
+  .card-result {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark-brown);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* floating badge */
+  .float-badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: var(--accent);
+    color: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(196, 98, 45, 0.4);
+  }
+
+  .float-badge .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .float-badge .label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PAIN SECTION ── */
+  .pain-section {
+    background: var(--dark-brown);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pain-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9B99A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .section-tag {
+    display: inline-block;
+    border: 1px solid rgba(201, 185, 154, 0.4);
+    color: var(--warm-tan);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .section-tag.dark { border-color: var(--warm-tan); color: var(--mid-brown); }
+
+  .pain-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--soft-white);
+    margin-bottom: 60px;
+    max-width: 600px;
+    line-height: 1.2;
+  }
+
+  .pain-headline em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .pain-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201, 185, 154, 0.15);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .pain-card:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-4px);
+    border-color: rgba(196, 98, 45, 0.4);
+  }
+
+  .pain-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .pain-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--soft-white);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .pain-card p {
+    font-size: 0.88rem;
+    color: rgba(201, 185, 154, 0.8);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── WHAT'S INSIDE ── */
+  .inside-section {
+    padding: 100px 80px;
+    background: var(--soft-white);
+  }
+
+  .inside-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .inside-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--dark-brown);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .inside-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .module-card {
+    background: var(--cream);
+    border: 1px solid var(--beige);
+    border-radius: 20px;
+    padding: 32px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+  }
+
+  .module-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(44, 26, 14, 0.1);
+    border-color: var(--accent);
+  }
+
+  .module-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .module-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+    margin-bottom: 8px;
+  }
+
+  .module-content p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* bonus */
+  .bonus-strip {
+    margin-top: 40px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--mid-brown) 100%);
+    border-radius: 20px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 900px;
+    margin: 40px auto 0;
+  }
+
+  .bonus-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .bonus-text p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .bonus-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FOR WHO ── */
+  .who-section {
+    padding: 100px 80px;
+    background: var(--cream);
+  }
+
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .who-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--dark-brown);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .who-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .who-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .who-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--soft-white);
+    border-radius: 14px;
+    border: 1px solid var(--beige);
+    font-size: 0.92rem;
+    color: var(--mid-brown);
+    line-height: 1.5;
+    transition: all 0.3s;
+  }
+
+  .who-item:hover {
+    border-color: var(--accent);
+    background: white;
+  }
+
+  .who-check {
+    width: 22px; height: 22px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+    font-size: 0.7rem;
+    margin-top: 1px;
+  }
+
+  /* ── TESTIMONIAL ── */
+  .social-proof {
+    padding: 80px;
+    background: var(--beige);
+    text-align: center;
+  }
+
+  .proof-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--dark-brown);
+    max-width: 700px;
+    margin: 0 auto 24px;
+    line-height: 1.5;
+  }
+
+  .proof-author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    padding: 100px 80px;
+    background: var(--soft-white);
+    text-align: center;
+  }
+
+  .pricing-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--dark-brown);
+    margin-bottom: 16px;
+  }
+
+  .pricing-sub {
+    color: var(--text-muted);
+    margin-bottom: 60px;
+    font-size: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-cards {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .price-card {
+    background: var(--cream);
+    border: 1px solid var(--beige);
+    border-radius: 24px;
+    padding: 48px 40px;
+    width: 320px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(44, 26, 14, 0.12);
+  }
+
+  .price-card.featured {
+    background: var(--dark-brown);
+    border-color: var(--accent);
+    transform: scale(1.04);
+  }
+
+  .price-card.featured:hover {
+    transform: scale(1.04) translateY(-6px);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    padding: 5px 18px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .price-tier {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .price-card.featured .price-tier { color: var(--warm-tan); }
+
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--dark-brown);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .price-card.featured .price-amount { color: var(--soft-white); }
+
+  .price-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .price-card.featured .price-note { color: var(--warm-tan); }
+
+  .price-features {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .price-feature {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    color: var(--mid-brown);
+    line-height: 1.5;
+  }
+
+  .price-card.featured .price-feature { color: rgba(201, 185, 154, 0.9); }
+
+  .feat-check {
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .price-card.featured .feat-check { color: var(--accent-light); }
+
+  .btn-enrol {
+    display: block;
+    text-align: center;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-enrol-outline {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-enrol-outline:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-enrol-solid {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 8px 24px rgba(196, 98, 45, 0.35);
+  }
+
+  .btn-enrol-solid:hover {
+    background: var(--accent-light);
+    box-shadow: 0 12px 32px rgba(196, 98, 45, 0.5);
+    transform: translateY(-1px);
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    padding: 100px 80px;
+    background: var(--cream);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--dark-brown);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--beige);
+    padding: 24px 0;
+  }
+
+  .faq-q {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dark-brown);
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; }
+
+  .faq-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+    color: var(--accent);
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    background: var(--dark-brown);
+    padding: 100px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 98, 45, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .footer-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--soft-white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .footer-cta h2 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .footer-cta p {
+    font-size: 1rem;
+    color: var(--warm-tan);
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .footer-bottom {
+    background: var(--dark-brown);
+    border-top: 1px solid rgba(201, 185, 154, 0.15);
+    padding: 24px 80px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(201, 185, 154, 0.5);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+    .pain-section, .inside-section, .who-section, .pricing-section, .footer-cta { padding: 70px 24px; }
+    .social-proof { padding: 60px 24px; }
+    .faq-section { padding: 70px 24px; }
+    .footer-bottom { padding: 20px 24px; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr; gap: 40px; }
+    .pricing-cards { flex-direction: column; align-items: center; }
+    .price-card.featured { transform: scale(1); }
+    .bonus-strip { flex-direction: column; text-align: center; }
+    .float-badge { bottom: -10px; right: -10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Reel Results</div>
+  <a href="#pricing" class="nav-cta">Enrol Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">✦ Now Open for Enrolment</div>
+    <h1 class="hero-headline">
+      Stop Editing Into<br>
+      the <em>Void.</em><br>
+      Start Getting <em>Paid.</em>
+    </h1>
+    <p class="hero-sub">
+      You have the skill. What you're missing is the system — the editing techniques, the AI tools, the brand strategy, and the personalised guidance to turn what you already do into real income.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">I'm Ready — Enrol Now</a>
+      <a href="#whats-inside" class="btn-ghost">See what's inside ↓</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <p style="font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px;">Sound familiar?</p>
+      <ul class="pain-list">
+        <li class="pain-item">
+          <span class="pain-icon">😞</span>
+          Spending hours on an edit that gets 200 views
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">😞</span>
+          Learning from random YouTube tutorials and still feeling lost
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">😞</span>
+          Having the skill but not the income to show for it
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">😞</span>
+          No idea how to build a brand or get clients consistently
+        </li>
+      </ul>
+      <div class="card-divider"></div>
+      <p class="card-result">"That ends with Reel Results."</p>
+    </div>
+    <div class="float-badge">
+      <div class="num">4</div>
+      <div class="label">Core Modules</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain-section">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-tag">The Problem</div>
+    <h2 class="pain-headline">You're not stuck because you're<br><em>not talented enough.</em></h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-card-icon">🎬</div>
+        <h3>Your edits don't stop the scroll</h3>
+        <p>You're editing videos without knowing what actually makes short-form content perform on each platform. Good editing and platform-optimised editing are two different things.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-card-icon">⏳</div>
+        <h3>You're wasting hours on workflow</h3>
+        <p>Without AI tools and efficient systems, editing takes 3x longer than it needs to. You're burning time you could be using to create more — or get paid more.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-card-icon">💸</div>
+        <h3>The skill isn't converting to income</h3>
+        <p>Having the skill is only half the equation. Without personal branding and monetization strategy, you stay an editor — not a business. That gap needs to close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="inside-section" id="whats-inside">
+  <div class="inside-header reveal">
+    <div class="section-tag dark">What's Inside</div>
+    <h2 class="inside-headline">Everything you need.<br>Nothing you don't.</h2>
+    <p class="inside-sub">Four focused modules built around what actually moves the needle — not filler content to make the course look bigger.</p>
+  </div>
+
+  <div class="modules-grid">
+    <div class="module-card reveal">
+      <div class="module-num">01</div>
+      <div class="module-content">
+        <h3>Short-Form Editing Mastery</h3>
+        <p>Learn to edit specifically for TikTok, Reels, and YouTube Shorts. Pacing, hooks, transitions, sound design — everything that makes the difference between content that performs and content that gets skipped.</p>
+      </div>
+    </div>
+    <div class="module-card reveal">
+      <div class="module-num">02</div>
+      <div class="module-content">
+        <h3>AI Tools & Workflow Optimisation</h3>
+        <p>Discover the exact AI editing tools that cut your production time in half. Work smarter, produce faster, and spend your energy where it counts — not on repetitive tasks.</p>
+      </div>
+    </div>
+    <div class="module-card reveal">
+      <div class="module-num">03</div>
+      <div class="module-content">
+        <h3>Personal Branding for Creators</h3>
+        <p>Build a brand that makes people follow you, remember you, and refer you. Your editing is the skill — your brand is what gets you paid consistently.</p>
+      </div>
+    </div>
+    <div class="module-card reveal">
+      <div class="module-num">04</div>
+      <div class="module-content">
+        <h3>Monetization Strategy</h3>
+        <p>Turn your skill into actual income. Whether through freelancing, content creation, or building digital products — you'll leave with a clear, executable plan.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bonus-strip reveal">
+    <div class="bonus-text">
+      <h3>✦ Personalised Feedback — Included</h3>
+      <p>Submit your actual edits and receive direct, specific feedback from me. Not generic advice — your work, reviewed personally.</p>
+    </div>
+    <span class="bonus-badge">Exclusive Bonus</span>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who-section">
+  <div class="who-grid">
+    <div class="reveal">
+      <div class="section-tag dark">Who This Is For</div>
+      <h2 class="who-headline">Built for people<br>who are <em>serious</em><br>about this.</h2>
+      <p class="who-desc">This programme is not for everyone. It is for the person who is done experimenting and ready to build with intention and structure.</p>
+    </div>
+    <ul class="who-list reveal">
+      <li class="who-item">
+        <span class="who-check">✓</span>
+        You've been teaching yourself from random tutorials and feel like you're going in circles
+      </li>
+      <li class="who-item">
+        <span class="who-check">✓</span>
+        You spend hours on edits but your content still isn't growing the way it should
+      </li>
+      <li class="who-item">
+        <span class="who-check">✓</span>
+        You have editing skills but no consistent income or clients to show for it
+      </li>
+      <li class="who-item">
+        <span class="who-check">✓</span>
+        You want to build a personal brand but don't know where to start
+      </li>
+      <li class="who-item">
+        <span class="who-check">✓</span>
+        You're ready to commit and do the actual work — not just watch videos and stay stuck
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof">
+  <p class="proof-quote reveal">"The people winning right now are not more talented than you. They are just better equipped."</p>
+  <p class="proof-author reveal">— The philosophy behind Reel Results</p>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-tag dark" style="display:inline-block; margin-bottom:16px;">Investment</div>
+  <h2 class="pricing-headline reveal">Choose Your Path</h2>
+  <p class="pricing-sub reveal">Two tiers. Both built to get you results. Pick the level of support that works for you.</p>
+
+  <div class="pricing-cards">
+    <div class="price-card reveal">
+      <div class="price-tier">Starter</div>
+      <div class="price-amount">₦50,000</div>
+      <div class="price-note">Full programme access</div>
+      <ul class="price-features">
+        <li class="price-feature"><span class="feat-check">✓</span> All 4 core modules</li>
+        <li class="price-feature"><span class="feat-check">✓</span> AI tools & workflow training</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Short-form editing techniques</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Personal branding module</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Monetization strategy</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Community access</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Assignment review</li>
+      </ul>
+      <a href="https://nestuge.com/zddy7zgaz" target="_blank" class="btn-enrol btn-enrol-outline">Enrol at ₦50,000</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="popular-badge">Most Popular</div>
+      <div class="price-tier">Premium</div>
+      <div class="price-amount">₦75,000</div>
+      <div class="price-note">Everything + personalised feedback</div>
+      <ul class="price-features">
+        <li class="price-feature"><span class="feat-check">✓</span> Everything in Starter</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Direct personalised feedback on your edits</li>
+        <li class="price-feature"><span class="feat-check">✓</span> 1 live Q&A session</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Priority support & response</li>
+        <li class="price-feature"><span class="feat-check">✓</span> Edit review — up to 3 submissions</li>
+      </ul>
+      <a href="https://nestuge.com/zddy7zgaz" target="_blank" class="btn-enrol btn-enrol-solid">Enrol at ₦75,000</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2 class="faq-headline reveal">Questions? Answered.</h2>
+
+  <div class="faq-item reveal">
+    <div class="faq-q">Do I need prior editing experience? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">No. The programme is designed to meet you where you are — whether you're starting from scratch or already editing and wanting to level up your results.</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q">What editing software does the course cover? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">The programme covers widely used tools including CapCut, and introduces AI-powered editing tools that work across platforms. The focus is on principles that transfer to any software.</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q">How does the personalised feedback work? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Premium students submit their edits directly and receive specific, actionable feedback from me personally — not a team, not automated notes. Real eyes on your real work.</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q">How long do I have access to the content? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">You get lifetime access to all course materials. Learn at your own pace and revisit the content whenever you need to.</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q">Is this course for content creators or aspiring freelancers? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Both. Whether you want to grow your own channel, build a freelance editing business, or both — the programme covers the skills, brand strategy, and monetization approach for each path.</div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2 class="reveal">You've been figuring this out<br>alone for <em>long enough.</em></h2>
+  <p class="reveal">It's time to build with structure, guidance, and a system that actually works. Your results are waiting.</p>
+  <a href="https://nestuge.com/zddy7zgaz" target="_blank" class="btn-primary reveal" style="display:inline-block;">Yes, I'm Ready — Enrol Now</a>
+</section>
+
+<div class="footer-bottom">
+  © 2025 Reel Results. All rights reserved.
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
